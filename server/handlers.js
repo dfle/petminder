@@ -5,7 +5,7 @@ var postMessage = function() {
   client.sendMessage({
     to: process.env.toNum,
     from: process.env.fromNum,
-    body: 'testing'
+    body: 'Walk the dogs!'
   })
   .then(function(response) {
     console.log('message sent', response);
