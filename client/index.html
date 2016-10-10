@@ -24,7 +24,7 @@
         <td>{{ dog.noon }}<input ng-model="dog.noon" type="checkbox"></td>
         <td>{{ dog.evening }}<input ng-model="dog.evening" type="checkbox"></td>
         <td>{{ dog.night }}<input ng-model="dog.night" type="checkbox"></td>
-        <td><button>Remind</button></td>
+        <td><button ng-click="vm.sendMessage()">Remind</button></td>
       </tr>
     </table>
     <script src="app.js"></script>

@@ -7,12 +7,16 @@ app.controller('AppController', function(AppFactory) {
   vm.test = 'test';
   vm.dogs = [];
 
+  vm.sendMessage = function() {
+    AppFactory.sendMessage();
+  };
+
   data.forEach(function(dog) {
     vm.dogs.push(new AppFactory.Dog(dog));
   });
 });
 
-app.factory('AppFactory', function() {
+app.factory('AppFactory', function($http) {
   var Dog = function(name) {
     this.name = name;
     this.morning = false;
@@ -21,7 +25,17 @@ app.factory('AppFactory', function() {
     this.night = false;
   };
 
+  var sendMessage = function() {
+    console.log('inside send message');
+    return $http({
+      method: 'POST',
+      url: '/api/messages'
+    });
+  };
+
   return {
-    Dog: Dog
+    Dog: Dog,
+    sendMessage: sendMessage
   }
+  
 });
