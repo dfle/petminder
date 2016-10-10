@@ -3,11 +3,30 @@
   <head>
     <meta charset="utf-8">
     <title>Petminder</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   </head>
   <body ng-controller="AppController as vm">
     <h1>Petminder</h1>
-    {{ vm.test }}
+    <h3>Don't forget the dogs!</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Morning</th>
+        <th>Noon</th>
+        <th>Evening</th>
+        <th>Night</th>
+        <th>Remind</th>
+      </tr>
+      <tr ng-repeat="dog in vm.dogs">
+        <td>{{ dog.name }}</td>
+        <td>{{ dog.morning }}<input ng-model="dog.morning" type="checkbox"></td>
+        <td>{{ dog.noon }}<input ng-model="dog.noon" type="checkbox"></td>
+        <td>{{ dog.evening }}<input ng-model="dog.evening" type="checkbox"></td>
+        <td>{{ dog.night }}<input ng-model="dog.night" type="checkbox"></td>
+        <td><button>Remind</button></td>
+      </tr>
+    </table>
     <script src="app.js"></script>
   </body>
 </html>
