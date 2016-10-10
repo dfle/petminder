@@ -4,8 +4,13 @@ var data = ['Blanket', 'Willow'];
 
 app.controller('AppController', function(AppFactory) {
   var vm = this;
-  vm.test = 'test';
+  vm.newDogName;
   vm.dogs = [];
+
+  vm.addDog = function() {
+    var newDog = AppFactory.addDog(vm.newDogName);
+    vm.dogs.push(newDog);
+  };
 
   vm.sendMessage = function() {
     AppFactory.sendMessage();
@@ -25,6 +30,11 @@ app.factory('AppFactory', function($http) {
     this.night = false;
   };
 
+  var addDog = function(name) {
+    console.log('inside addDog', name);
+    return new this.Dog(name);
+  };
+
   var sendMessage = function() {
     console.log('inside send message');
     return $http({
@@ -35,7 +45,8 @@ app.factory('AppFactory', function($http) {
 
   return {
     Dog: Dog,
+    addDog: addDog,
     sendMessage: sendMessage
   }
-  
+
 });

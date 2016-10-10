@@ -9,6 +9,10 @@
   <body ng-controller="AppController as vm">
     <h1>Petminder</h1>
     <h3>Don't forget the dogs!</h3>
+    <form>
+      <input ng-model="vm.newDogName" type="text" placeholder="Enter your dog's name"></input>
+      <button ng-click="vm.addDog(vm.newDog)" type="submit">Add Dog</button>
+    </form>
     <table>
       <tr>
         <th>Name</th>
