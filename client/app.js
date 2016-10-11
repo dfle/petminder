@@ -1,32 +1,34 @@
 var app = angular.module('app', []);
 
-var data = ['Blanket', 'Willow'];
-
 app.controller('AppController', function(AppFactory) {
   var vm = this;
   vm.newDogName;
   vm.newDogOwner;
   vm.newDogAddress;
-  vm.dogs = AppFactory.dogs;
+  vm.dogs = [];
 
-  vm.addDog = function() {
-    if (!!vm.newDogName) {
-      var newDog = AppFactory.addDog(vm.newDogName, vm.newDogOwner, vm.newDogAddress);
-      vm.dogs.push(newDog);
-    }
-    vm.newDogName = '';
-    vm.newDogOwner = '';
-    vm.newDogAddress = '';
+  vm.addDog = function(name, owner, address) {
+    AppFactory.addDog(name, owner, address);
+  };
+
+  vm.addDogWalk = function(name) {
+    AppFactory.addDogWalk(name);
   };
 
   vm.sendMessage = function() {
     AppFactory.sendMessage();
   };
 
-  // data.forEach(function(dog) {
-  //   vm.dogs.push(new AppFactory.Dog(dog));
-  // });
-  AppFactory.initialize();
+  vm.getDogs = function() {
+    console.log('inside vm.getDogs');
+    AppFactory.getDogs()
+      .then(function(dogs) {
+        vm.dogs = dogs.data;
+        console.log(vm.dogs, dogs);
+      });
+    };
+
+  vm.getDogs();
 });
 
 app.factory('AppFactory', function($http) {
@@ -40,11 +42,36 @@ app.factory('AppFactory', function($http) {
     this.noon = false;
     this.evening = false;
     this.night = false;
+    // this.addDogWalk = function() {
+    //   console.log('inside Dog addDogWalk');
+    //   return $http({
+    //     method: 'POST',
+    //     url: '/api/walks',
+    //     data: { name: name }
+    //   });
+    // };
   };
 
   var addDog = function(name, owner, address) {
     console.log('inside addDog', name, owner, address);
-    return new this.Dog(name, owner, address);
+    //return new this.Dog(name, owner, address);
+    var newDog = new this.Dog(name, owner, address);
+    console.log(newDog);
+    // add newDog to database
+    return $http({
+      method: 'POST',
+      url: '/api/dogs',
+      data: newDog
+    });
+  };
+
+  var addDogWalk = function(name) {
+    console.log('inside Dog addDogWalk');
+    return $http({
+      method: 'POST',
+      url: '/api/walks',
+      data: { name: name }
+    });
   };
 
   var sendMessage = function() {
@@ -55,18 +82,23 @@ app.factory('AppFactory', function($http) {
     });
   };
 
-  var initialize = function() {
-    console.log('inside initialize');
-    data.forEach(function(dog) {
-      dogs.push(new Dog(dog));
+  var getDogs = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/dogs'
+    }).
+    then(function(data) {
+      console.log(data);
+      return data;
     });
   };
-  
+
   return {
     dogs: dogs,
     Dog: Dog,
     addDog: addDog,
-    initialize: initialize,
+    addDogWalk: addDogWalk,
+    getDogs: getDogs,
     sendMessage: sendMessage
   }
 });

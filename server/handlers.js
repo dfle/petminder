@@ -1,4 +1,4 @@
-var client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
+ var client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
 var postMessage = function() {
   console.log('someone tried to post to /api/messages');

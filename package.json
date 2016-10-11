@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dfle/petminder#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "mongodb": "^2.2.10",
