@@ -4,7 +4,6 @@ var DogRecord = require('./db').DogRecord;
 var DogWalkRecord = require('./db').DogWalkRecord;
 
 var addDogRecord = function(req, res) {
-  console.log('inside addDogRecord', req.body.name, req.body.owner, req.body.address, req.body.morning);
   new DogRecord({
     name: req.body.name,
     owner: req.body.owner,
@@ -36,7 +35,7 @@ var addDogWalkRecord = function(req, res) {
       console.log(DogWalkRecord);
     }
   });
-  // update dog walk
+
   DogRecord.findOneAndUpdate({ name: req.body.name, owner: req.body.owner, address: req.body.address }, {morning: req.body.morning, noon: req.body.noon, evening: req.body.evening, night: req.body.night}, {new: true})
     .then(function(dogRecord) {
       console.log('dogRecord', dogRecord);

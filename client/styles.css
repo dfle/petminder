@@ -1,3 +1,51 @@
 body {
-  font-family: sans-serif
+  font-family: 'Montserrat', sans-serif !important;
+  padding-top: 51px;
+}
+h1, .addDog {
+  padding-bottom: 30px;
+}
+.navbar {
+  margin-bottom: 0px;
+  min-height:10px !important;
+}
+.navbar-inner {
+  background:transparent;
+}
+.jumbotron {
+  height: 100vh;
+}
+.jumbotron-image-bg {
+  background-image: url("/assets/home.jpeg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+  height: 100vw;
+}
+#backgroundcolor{
+  background-color:rgba(255,255,255,0); the 0.5 allows for it to opacity.
+}
+.jumbotron .container {
+  text-align:center;
+  margin-top:70px;
+  margin-bottom:70px;
+  width:auto;
+  z-index:2;
+  color: white;
+}
+.element {
+  position: relative;
+  top: 35%;
+  transform: translateY(-50%);
+}
+tr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+td>input[type=checkbox] {
+    margin-left: 20px;
+}
+input[type=text] {
+  margin-left: 10px;
+  margin-right: 68px;
 }

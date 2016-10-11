@@ -5,56 +5,23 @@
     <title>Petminder</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
   </head>
-  <body ng-controller="AppController as vm">
-    <div class="container">
-      <h1>Petminder</h1>
-      <h3>Don't forget about the dogs!</h3>
-
-      <form type="submit" name="form">
-        <label for="dogName">Dog Name</label>
-        <input ng-model="newDogName" type="text" id="dogName" placeholder="Enter dog's name"></input>
-        <label for="owner">Owner Name</label>
-        <input ng-model="newDogOwner" type="text" id="owner" placeholder="Enter owner's name"></input>
-        <label for="address">Address</label>
-        <input ng-model="newDogAddress" type="text" id="address" placeholder="Enter dog's address"></input>
-        <button ng-click="vm.addDog(newDogName, newDogOwner, newDogAddress); vm.reset()" type="submit">Add Dog</button>
-      </form>
-      <table class="table">
-        <tr>
-          <th>Name</th>
-          <th>Owner</th>
-          <th>Address</th>
-          <th>Morning</th>
-          <th>Noon</th>
-          <th>Evening</th>
-          <th>Night</th>
-          <th>Remind</th>
-        </tr>
-        <tr ng-repeat="dog in vm.dogs">
-          <td>{{ dog.name }}</td>
-          <td>{{ dog.owner }}</td>
-          <td>{{ dog.address }}</td>
-          <td>{{ dog.morning }}<input ng-model="dog.morning" ng-change="vm.addDogWalk(dog, 'dog.morning')" type="checkbox"></td>
-          <td>{{ dog.noon }}<input ng-model="dog.noon" ng-change="vm.addDogWalk(dog, 'dog.noon')" type="checkbox"></td>
-          <td>{{ dog.evening }}<input ng-model="dog.evening" ng-change="vm.addDogWalk(dog, 'dog.evening')" type="checkbox"></td>
-          <td>{{ dog.night }}<input ng-model="dog.night" ng-change="vm.addDogWalk(dog, 'dog.night')" type="checkbox"></td>
-          <td><button ng-click="vm.sendMessage()">Remind</button></td>
-        </tr>
-      </table>
-
-      <table class="table">
-        <tr>
-          <th>Name</th>
-          <th>Time</th>
-        </tr>
-        <tr ng-repeat="record in vm.DogWalkRecords">
-          <td>{{ record.name }}</td>
-          <td>{{ record.time }}</td>
-        </tr>
-      </table>
-    </div>
-    <script src="app.js"></script>
+  <body>
+    <nav class="navbar navbar-fixed-top bg-faded">
+      <a class="navbar-brand" href="#/">PETMINDER</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#/main">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#/walks">Walk Log</a></li>
+      </ul>
+    </nav>
+    <div ui-view></div>
+    <script src="./main/main.factory.js"></script>
+    <script src="./main/main.controller.js"></script>
+    <script src="./walks/walks.controller.js"></script>
+    <script src="./walks/walks.factory.js"></script>
+    <script src="./app.js"></script>
   </body>
 </html>
