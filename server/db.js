@@ -21,7 +21,7 @@ var dogRecordSchema = new mongoose.Schema({
 
 var dogWalkRecordSchema = new mongoose.Schema({
   name: String,
-  time: Date
+  time: String
 });
 
 var DogRecord = mongoose.model('DogRecord', dogRecordSchema);

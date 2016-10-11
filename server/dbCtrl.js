@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 var DogRecord = require('./db').DogRecord;
 var DogWalkRecord = require('./db').DogWalkRecord;
 
@@ -26,7 +27,7 @@ var addDogWalkRecord = function(req, res) {
   // add record of dog walk
   new DogWalkRecord({
     name: req.body.name,
-    time: new Date()
+    time: moment().format('MMMM Do YYYY, h:mm:ss a')
   })
   .save(function(err, DogWalkRecord) {
     if (err) {
@@ -55,8 +56,19 @@ var getDogRecord = function(req, res) {
   });
 };
 
+var getDogWalkRecord = function(req, res) {
+  DogWalkRecord.find({}, function(err, records) {
+    console.log('err', err, 'records', records);
+    return records;
+  })
+  .then(function(records){
+    res.send(records);
+  });
+};
+
 module.exports = {
   addDogRecord: addDogRecord,
   addDogWalkRecord: addDogWalkRecord,
-  getDogRecord: getDogRecord
+  getDogRecord: getDogRecord,
+  getDogWalkRecord: getDogWalkRecord
 };

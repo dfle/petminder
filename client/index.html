@@ -9,41 +9,52 @@
   </head>
   <body ng-controller="AppController as vm">
     <div class="container">
-    <h1>Petminder</h1>
-    <h3>Don't forget about the dogs!</h3>
+      <h1>Petminder</h1>
+      <h3>Don't forget about the dogs!</h3>
 
-    <form type="submit" name="form">
-      <label for="dogName">Dog Name</label>
-      <input ng-model="newDogName" type="text" id="dogName" placeholder="Enter dog's name"></input>
-      <label for="owner">Owner Name</label>
-      <input ng-model="newDogOwner" type="text" id="owner" placeholder="Enter owner's name"></input>
-      <label for="address">Address</label>
-      <input ng-model="newDogAddress" type="text" id="address" placeholder="Enter dog's address"></input>
-      <button ng-click="vm.addDog(newDogName, newDogOwner, newDogAddress); vm.reset()" type="submit">Add Dog</button>
-    </form>
-    <table class="table">
-      <tr>
-        <th>Name</th>
-        <th>Owner</th>
-        <th>Address</th>
-        <th>Morning</th>
-        <th>Noon</th>
-        <th>Evening</th>
-        <th>Night</th>
-        <th>Remind</th>
-      </tr>
-      <tr ng-repeat="dog in vm.dogs">
-        <td>{{ dog.name }}</td>
-        <td>{{ dog.owner }}</td>
-        <td>{{ dog.address }}</td>
-        <td>{{ dog.morning }}<input ng-model="dog.morning" ng-change="vm.addDogWalk(dog, 'dog.morning')" type="checkbox"></td>
-        <td>{{ dog.noon }}<input ng-model="dog.noon" ng-change="vm.addDogWalk(dog, 'dog.noon')" type="checkbox"></td>
-        <td>{{ dog.evening }}<input ng-model="dog.evening" ng-change="vm.addDogWalk(dog, 'dog.evening')" type="checkbox"></td>
-        <td>{{ dog.night }}<input ng-model="dog.night" ng-change="vm.addDogWalk(dog, 'dog.night')" type="checkbox"></td>
-        <td><button ng-click="vm.sendMessage()">Remind</button></td>
-      </tr>
-    </table>
-  </div>
+      <form type="submit" name="form">
+        <label for="dogName">Dog Name</label>
+        <input ng-model="newDogName" type="text" id="dogName" placeholder="Enter dog's name"></input>
+        <label for="owner">Owner Name</label>
+        <input ng-model="newDogOwner" type="text" id="owner" placeholder="Enter owner's name"></input>
+        <label for="address">Address</label>
+        <input ng-model="newDogAddress" type="text" id="address" placeholder="Enter dog's address"></input>
+        <button ng-click="vm.addDog(newDogName, newDogOwner, newDogAddress); vm.reset()" type="submit">Add Dog</button>
+      </form>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Owner</th>
+          <th>Address</th>
+          <th>Morning</th>
+          <th>Noon</th>
+          <th>Evening</th>
+          <th>Night</th>
+          <th>Remind</th>
+        </tr>
+        <tr ng-repeat="dog in vm.dogs">
+          <td>{{ dog.name }}</td>
+          <td>{{ dog.owner }}</td>
+          <td>{{ dog.address }}</td>
+          <td>{{ dog.morning }}<input ng-model="dog.morning" ng-change="vm.addDogWalk(dog, 'dog.morning')" type="checkbox"></td>
+          <td>{{ dog.noon }}<input ng-model="dog.noon" ng-change="vm.addDogWalk(dog, 'dog.noon')" type="checkbox"></td>
+          <td>{{ dog.evening }}<input ng-model="dog.evening" ng-change="vm.addDogWalk(dog, 'dog.evening')" type="checkbox"></td>
+          <td>{{ dog.night }}<input ng-model="dog.night" ng-change="vm.addDogWalk(dog, 'dog.night')" type="checkbox"></td>
+          <td><button ng-click="vm.sendMessage()">Remind</button></td>
+        </tr>
+      </table>
+
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Time</th>
+        </tr>
+        <tr ng-repeat="record in vm.DogWalkRecords">
+          <td>{{ record.name }}</td>
+          <td>{{ record.time }}</td>
+        </tr>
+      </table>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>

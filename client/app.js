@@ -3,6 +3,7 @@ var app = angular.module('app', []);
 app.controller('AppController', function($scope, AppFactory) {
   var vm = this;
   vm.dogs = [];
+  vm.dogWalkRecords = [];
 
   vm.addDog = function(name, owner, address) {
     AppFactory.addDog(name, owner, address);
@@ -10,7 +11,6 @@ app.controller('AppController', function($scope, AppFactory) {
   };
 
   vm.addDogWalk = function(dog, timeOfDay) {
-    console.log('inside vm.addDogWalk', timeOfDay)
     AppFactory.addDogWalk(dog, timeOfDay);
   };
 
@@ -19,11 +19,17 @@ app.controller('AppController', function($scope, AppFactory) {
   };
 
   vm.getDogs = function() {
-    console.log('inside vm.getDogs');
     AppFactory.getDogs()
       .then(function(dogs) {
         vm.dogs = dogs.data;
-        console.log(vm.dogs, dogs);
+      });
+  };
+
+  vm.getDogWalkRecord = function() {
+    AppFactory.getDogWalkRecord()
+      .then(function(records){
+        vm.dogWalkRecords = records.data;
+        console.log('dog walk records', vm.dogWalkRecords);
       });
   };
 
@@ -34,6 +40,7 @@ app.controller('AppController', function($scope, AppFactory) {
   };
 
   vm.getDogs();
+  vm.getDogWalkRecord();
 });
 
 app.factory('AppFactory', function($http) {
@@ -66,7 +73,9 @@ app.factory('AppFactory', function($http) {
     console.log('inside Dog addDogWalk', timeOfDay);
     for (var key in dog) {
       if (key === timeOfDay) {
-        dog[timeOfDay] = !dog[timeOfDay];
+        if (!dog[timeOfDay]) {
+          dog[timeOfDay] = !dog[timeOfDay];
+        }
       }
     }
     console.log('dog in addDogWalk', dog);
@@ -91,7 +100,17 @@ app.factory('AppFactory', function($http) {
       url: '/api/dogs'
     })
     .then(function(data) {
-      console.log(data);
+      return data;
+    });
+  };
+
+  var getDogWalkRecord = function() {
+    console.log('inside getDogWalkRecord');
+    return $http({
+      method: 'GET',
+      url: '/api/walks'
+    })
+    .then(function(data) {
       return data;
     });
   };
@@ -102,6 +121,7 @@ app.factory('AppFactory', function($http) {
     addDog: addDog,
     addDogWalk: addDogWalk,
     getDogs: getDogs,
+    getDogWalkRecord: getDogWalkRecord,
     sendMessage: sendMessage
   }
 });

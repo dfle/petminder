@@ -13,10 +13,12 @@ app.use('/', express.static(__dirname + '/client'));
 
 app.post('/api/messages', handlers.postMessage);
 
-app.post('/api/dogs', dbCtrl.addDogRecord);
 app.get('/api/dogs', dbCtrl.getDogRecord);
+app.post('/api/dogs', dbCtrl.addDogRecord);
 
+app.get('/api/walks', dbCtrl.getDogWalkRecord)
 app.post('/api/walks', dbCtrl.addDogWalkRecord);
+
 
 
 
