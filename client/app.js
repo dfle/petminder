@@ -11,8 +11,9 @@ app.controller('AppController', function(AppFactory) {
     AppFactory.addDog(name, owner, address);
   };
 
-  vm.addDogWalk = function(name) {
-    AppFactory.addDogWalk(name);
+  vm.addDogWalk = function(dog) {
+    console.log('inside vm.addDogWalk')
+    AppFactory.addDogWalk(dog);
   };
 
   vm.sendMessage = function() {
@@ -65,12 +66,12 @@ app.factory('AppFactory', function($http) {
     });
   };
 
-  var addDogWalk = function(name) {
+  var addDogWalk = function(dog) {
     console.log('inside Dog addDogWalk');
     return $http({
       method: 'POST',
       url: '/api/walks',
-      data: { name: name }
+      data: { name: dog.name }
     });
   };
 
