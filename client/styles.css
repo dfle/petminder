@@ -49,3 +49,11 @@ input[type=text] {
   margin-left: 10px;
   margin-right: 68px;
 }
+#blanket {
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+}
+.bio {
+  text-align: center;
+}
