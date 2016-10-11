@@ -26,7 +26,7 @@ var addDogWalkRecord = function(req, res) {
   // add record of dog walk
   new DogWalkRecord({
     name: req.body.name,
-    time: moment().format('MMMM Do YYYY, h:mm:ss a')
+    time: moment().utcOffset(-8).format('MMMM Do YYYY, h:mm:ss a')
   })
   .save(function(err, DogWalkRecord) {
     if (err) {
