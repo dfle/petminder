@@ -49,7 +49,8 @@ var getDogRecord = function(req, res) {
   DogRecord.find({}, function(err, records) {
     console.log('err', err, 'records', records);
     return records;
-  }).then(function(records){
+  })
+  .then(function(records){
     res.send(records);
   });
 };

@@ -1,14 +1,12 @@
 var app = angular.module('app', []);
 
-app.controller('AppController', function(AppFactory) {
+app.controller('AppController', function($scope, AppFactory) {
   var vm = this;
-  vm.newDogName;
-  vm.newDogOwner;
-  vm.newDogAddress;
   vm.dogs = [];
 
   vm.addDog = function(name, owner, address) {
     AppFactory.addDog(name, owner, address);
+    vm.getDogs();
   };
 
   vm.addDogWalk = function(dog, timeOfDay) {
@@ -27,7 +25,13 @@ app.controller('AppController', function(AppFactory) {
         vm.dogs = dogs.data;
         console.log(vm.dogs, dogs);
       });
-    };
+  };
+
+  vm.reset = function() {
+    $scope.newDogName = '';
+    $scope.newDogOwner = '';
+    $scope.newDogAddress = '';
+  };
 
   vm.getDogs();
 });
@@ -85,8 +89,8 @@ app.factory('AppFactory', function($http) {
     return $http({
       method: 'GET',
       url: '/api/dogs'
-    }).
-    then(function(data) {
+    })
+    .then(function(data) {
       console.log(data);
       return data;
     });

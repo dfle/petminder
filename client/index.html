@@ -12,15 +12,14 @@
     <h1>Petminder</h1>
     <h3>Don't forget about the dogs!</h3>
 
-    <form>
+    <form type="submit" name="form">
       <label for="dogName">Dog Name</label>
       <input ng-model="newDogName" type="text" id="dogName" placeholder="Enter dog's name"></input>
-      {{newDogName}}
       <label for="owner">Owner Name</label>
       <input ng-model="newDogOwner" type="text" id="owner" placeholder="Enter owner's name"></input>
       <label for="address">Address</label>
       <input ng-model="newDogAddress" type="text" id="address" placeholder="Enter dog's address"></input>
-      <button ng-click="vm.addDog(newDogName, newDogOwner, newDogAddress)" type="submit">Add Dog</button>
+      <button ng-click="vm.addDog(newDogName, newDogOwner, newDogAddress); vm.reset()" type="submit">Add Dog</button>
     </form>
     <table class="table">
       <tr>
