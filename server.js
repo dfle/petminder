@@ -5,7 +5,7 @@ var handlers = require('./server/handlers');
 var db = require('./server/db');
 var dbCtrl = require('./server/dbCtrl');
 var app = express();
-var port = 9001;
+var port = process.env.PORT || 9001;
 
 app.use(bodyParser());
 
