@@ -23,6 +23,7 @@ var addDogRecord = function(req, res) {
 };
 
 var addDogWalkRecord = function(req, res) {
+  // add record of dog walk
   new DogWalkRecord({
     name: req.body.name,
     time: new Date()
@@ -34,6 +35,14 @@ var addDogWalkRecord = function(req, res) {
       console.log(DogWalkRecord);
     }
   });
+  // update dog walk
+  DogRecord.findOneAndUpdate({ name: req.body.name, owner: req.body.owner, address: req.body.address }, {morning: req.body.morning, noon: req.body.noon, evening: req.body.evening, night: req.body.night}, {new: true})
+    .then(function(dogRecord) {
+      console.log('dogRecord', dogRecord);
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 }
 
 var getDogRecord = function(req, res) {

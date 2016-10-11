@@ -11,9 +11,9 @@ app.controller('AppController', function(AppFactory) {
     AppFactory.addDog(name, owner, address);
   };
 
-  vm.addDogWalk = function(dog) {
-    console.log('inside vm.addDogWalk')
-    AppFactory.addDogWalk(dog);
+  vm.addDogWalk = function(dog, timeOfDay) {
+    console.log('inside vm.addDogWalk', timeOfDay)
+    AppFactory.addDogWalk(dog, timeOfDay);
   };
 
   vm.sendMessage = function() {
@@ -43,14 +43,6 @@ app.factory('AppFactory', function($http) {
     this.noon = false;
     this.evening = false;
     this.night = false;
-    // this.addDogWalk = function() {
-    //   console.log('inside Dog addDogWalk');
-    //   return $http({
-    //     method: 'POST',
-    //     url: '/api/walks',
-    //     data: { name: name }
-    //   });
-    // };
   };
 
   var addDog = function(name, owner, address) {
@@ -66,12 +58,18 @@ app.factory('AppFactory', function($http) {
     });
   };
 
-  var addDogWalk = function(dog) {
-    console.log('inside Dog addDogWalk');
+  var addDogWalk = function(dog, timeOfDay) {
+    console.log('inside Dog addDogWalk', timeOfDay);
+    for (var key in dog) {
+      if (key === timeOfDay) {
+        dog[timeOfDay] = !dog[timeOfDay];
+      }
+    }
+    console.log('dog in addDogWalk', dog);
     return $http({
       method: 'POST',
       url: '/api/walks',
-      data: { name: dog.name }
+      data: { name: dog.name, owner: dog.owner, address: dog.address, morning: dog.morning, noon: dog.noon, evening: dog.evening, night: dog.night }
     });
   };
 
