@@ -4,6 +4,7 @@
   "description": "Keep track of when your dogs have been walked and send a friendly reminder!",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "moment": "^2.15.1",
     "mongodb": "^2.2.10",
     "mongoose": "^4.6.3",
+    "nodemon": "^1.11.0",
     "twilio": "^2.11.0",
     "ui-router": "^1.0.0-alpha.3"
   }
