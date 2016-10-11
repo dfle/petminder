@@ -4,7 +4,6 @@
   "description": "Keep track of when your dogs have been walked and send a friendly reminder!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
